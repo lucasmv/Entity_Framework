@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Dominio.Entities;
+using Repositorio.Contexto;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace UIConsole
+namespace Aplicacao
 {
     public class CategoriaApp
     {

@@ -42,7 +42,7 @@ namespace Repositorio.Repositories
             //m_Context.SaveChanges();
         }
 
-        public void Update(TEntity obj)
+        public virtual void Update(TEntity obj)
         {
             m_Context.Entry(obj).State = EntityState.Modified;
             //m_Context.SaveChanges();
