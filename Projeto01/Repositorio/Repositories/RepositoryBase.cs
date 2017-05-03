@@ -18,7 +18,7 @@ namespace Repositorio.Repositories
             m_DbSet = m_Context.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             //Desativa Lazy Loading
             //m_Context.Configuration.ProxyCreationEnabled = false;

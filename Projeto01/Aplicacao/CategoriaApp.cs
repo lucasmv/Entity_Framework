@@ -6,7 +6,7 @@ namespace Aplicacao
 {
     public class CategoriaApp
     {
-        public CategoriaRepository repository { get; set; }
+        private CategoriaRepository repository { get; set; }
 
         public CategoriaApp()
         {

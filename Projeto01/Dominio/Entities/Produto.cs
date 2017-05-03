@@ -4,9 +4,9 @@ namespace Dominio.Entities
 {
     public class Produto
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Nome { get; set; }
-        public int CategoriaId { get; set; }
+        public long CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
         public virtual ICollection<ListaDeProduto> ListaDeProdutos { get; set; }
 

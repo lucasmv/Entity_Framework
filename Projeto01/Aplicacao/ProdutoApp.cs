@@ -8,7 +8,7 @@ namespace Aplicacao
 {
     public class ProdutoApp
     {
-        public ProdutoRepository repository { get; set; }
+        private ProdutoRepository repository { get; set; }
 
         public ProdutoApp()
         {

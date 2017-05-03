@@ -1,12 +1,21 @@
 ﻿using Dominio.Entities;
 using Dominio.Interfaces;
-using Repositorio.Contexto;
+using System.Data.Entity;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Repositorio.Repositories
 {
     public class ListaDeProdutoRepository : RepositoryBase<ListaDeProduto>, IListaDeProdutoRepository
     {
+
+        public override IEnumerable<ListaDeProduto> GetAll()
+        {
+            return m_Context.ListaDeProdutos
+                .Include(x => x.Produtos)
+                .Include(x => x.Produtos.Select(c => c.Categoria))
+                .ToList();
+        }
 
         public override void Insert(ListaDeProduto listaDeProduto)
         {

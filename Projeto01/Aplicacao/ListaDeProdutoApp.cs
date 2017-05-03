@@ -6,7 +6,7 @@ namespace Aplicacao
 {
     public class ListaDeProdutoApp
     {
-        public ListaDeProdutoRepository repository { get; set; }
+        private ListaDeProdutoRepository repository { get; set; }
 
         public ListaDeProdutoApp()
         {
