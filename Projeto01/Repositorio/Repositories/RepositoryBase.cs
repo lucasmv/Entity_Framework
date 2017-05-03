@@ -12,9 +12,9 @@ namespace Repositorio.Repositories
 
         protected DbSet<TEntity> m_DbSet;
 
-        public RepositoryBase(Context context)
+        public RepositoryBase()
         {
-            m_Context = context;
+            m_Context = new Context();
             m_DbSet = m_Context.Set<TEntity>();
         }
 
@@ -30,22 +30,22 @@ namespace Repositorio.Repositories
             return m_DbSet.Find(id);
         }
 
-        public void Insert(TEntity obj)
+        public virtual void Insert(TEntity obj)
         {
             m_DbSet.Add(obj);
-            //m_Context.SaveChanges();
+            m_Context.SaveChanges();
         }
 
         public void Remove(TEntity obj)
         {
             m_DbSet.Remove(obj);
-            //m_Context.SaveChanges();
+            m_Context.SaveChanges();
         }
 
         public virtual void Update(TEntity obj)
         {
             m_Context.Entry(obj).State = EntityState.Modified;
-            //m_Context.SaveChanges();
+            m_Context.SaveChanges();
         }
 
     }

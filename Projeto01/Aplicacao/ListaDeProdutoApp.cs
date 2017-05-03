@@ -1,52 +1,43 @@
 ﻿using Dominio.Entities;
-using Repositorio.Contexto;
+using Repositorio.Repositories;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 
 namespace Aplicacao
 {
     public class ListaDeProdutoApp
     {
-        public Context db { get; set; }
+        public ListaDeProdutoRepository repository { get; set; }
 
         public ListaDeProdutoApp()
         {
-            db = new Context();
+            repository = new ListaDeProdutoRepository();
         }
 
-        public void Salvar(ListaDeProduto listaDeProduto)
+        public void Insert(ListaDeProduto listaDeProduto)
         {
-            listaDeProduto.Produtos = listaDeProduto.Produtos.Select(produto => db.Produtos.FirstOrDefault(x => x.Id == produto.Id)).ToList();
-
-            db.ListaDeProdutos.Add(listaDeProduto);
-            db.SaveChanges();
+            repository.Insert(listaDeProduto);
         }
 
-        public IEnumerable<ListaDeProduto> Listar()
+        public ListaDeProduto GetById(long id)
         {
-            return db.ListaDeProdutos
-                    .Include(x => x.Produtos)
-                    .Include(x => x.Produtos.Select(c => c.Categoria));
+            return repository.GetById(id);
         }
 
-        public void Alterar(ListaDeProduto listaDeProduto)
+        public IEnumerable<ListaDeProduto> GetAll()
         {
-            var listaSalvar = db.ListaDeProdutos.Find(listaDeProduto.Id);
-
-            listaSalvar.Produtos = listaDeProduto.Produtos.Select(produto => db.Produtos.FirstOrDefault(x => x.Id == produto.Id)).ToList();
-            listaSalvar.Descricao = listaDeProduto.Descricao;
-
-            db.SaveChanges();
-
+            return repository.GetAll();
         }
 
-        public void Excluir(int id)
+        public void Update(ListaDeProduto listaDeProduto)
         {
-            var listaExcluir = db.ListaDeProdutos.Find(id);
+            repository.Update(listaDeProduto);
+        }
 
-            db.ListaDeProdutos.Remove(listaExcluir);
-            db.SaveChanges();
+        public void Remove(int id)
+        {
+            var listaExcluir = repository.GetById(id);
+
+            repository.Remove(listaExcluir);
         }
     }
 }

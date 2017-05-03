@@ -1,43 +1,43 @@
 ﻿using Dominio.Entities;
-using Repositorio.Contexto;
+using Repositorio.Repositories;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 
 namespace Aplicacao
 {
     public class CategoriaApp
     {
-        public Context db { get; set; }
+        public CategoriaRepository repository { get; set; }
 
         public CategoriaApp()
         {
-            db = new Context();
+            repository = new CategoriaRepository();
         }
 
-        public void Salvar(Categoria categoria)
+        public void Insert(Categoria categoria)
         {
-            db.Categorias.Add(categoria);
-            db.SaveChanges();
+            repository.Insert(categoria);
         }
 
-        public IEnumerable<Categoria> Listar()
+        public Categoria GetById(long id)
         {
-            return db.Categorias.OrderBy(x => x.Descricao);
+            return repository.GetById(id);
         }
 
-        public void Alterar(Categoria categoria)
+        public IEnumerable<Categoria> GetAll()
         {
-            db.Entry(categoria).State = EntityState.Modified;
-            db.SaveChanges();
+            return repository.GetAll();
         }
 
-        public void Excluir(int id)
+        public void Update(Categoria categoria)
         {
-            var categoria = db.Categorias.Find(id);
+            repository.Update(categoria);
+        }
 
-            db.Categorias.Remove(categoria);
-            db.SaveChanges();
+        public void Excluir(long id)
+        {
+            var categoria = repository.GetById(id);
+
+            repository.Remove(categoria);
         }
     }
 }

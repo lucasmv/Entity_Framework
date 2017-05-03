@@ -1,46 +1,45 @@
 ﻿using Dominio.Entities;
 using Repositorio.Contexto;
+using Repositorio.Repositories;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace Aplicacao
 {
     public class ProdutoApp
     {
-        public Context db { get; set; }
+        public ProdutoRepository repository { get; set; }
 
         public ProdutoApp()
         {
-            db = new Context();
+            repository = new ProdutoRepository();
         }
 
-        public void Salvar(Produto produto)
+        public void Insert(Produto produto)
         {
-            if (produto.Categoria != null)
-                produto.Categoria = db.Categorias.Where(x => x.Id == produto.Categoria.Id).FirstOrDefault();
-
-            db.Produtos.Add(produto);
-            db.SaveChanges();
+            repository.Insert(produto);
         }
 
-        public IEnumerable<Produto> Listar()
+        public Produto GetById(long id)
         {
-            return db.Produtos.Include(x => x.Categoria).OrderBy(x => x.Nome);
+            return repository.GetById(id);
         }
 
-        public void Alterar(Produto produto)
+        public IEnumerable<Produto> GetAll()
         {
-            db.Entry(produto).State = EntityState.Modified;
-            db.SaveChanges();
+            return repository.GetAll();
         }
 
-        public void Excluir(int id)
+        public void Update(Produto produto)
         {
-            var produto = db.Produtos.Where(x => x.Id == id).First();
-            db.Produtos.Remove(produto);
-            //db.Set<Produto>().Remove(produto);
-            db.SaveChanges();
+            repository.Update(produto);
+        }
+
+        public void Excluir(long id)
+        {
+            var produto = repository.GetById(id);
+            repository.Remove(produto);
+
         }
 
     }

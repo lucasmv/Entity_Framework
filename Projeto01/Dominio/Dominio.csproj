@@ -43,6 +43,9 @@
     <Compile Include="Entities\Categoria.cs" />
     <Compile Include="Entities\ListaDeProduto.cs" />
     <Compile Include="Entities\Produto.cs" />
+    <Compile Include="Interfaces\ICategoriaRepository.cs" />
+    <Compile Include="Interfaces\IListaDeProdutoRepository.cs" />
+    <Compile Include="Interfaces\IProdutoRepository.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
